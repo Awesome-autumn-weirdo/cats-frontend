@@ -1,38 +1,383 @@
-.App {
-  text-align: center;
+/* Основные стили */
+
+html, body {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    background-color: #fff5f5;
+    color: #5a3e36;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+a {
+    color: #ff85a2;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+a:hover {
+    color: #ff477e;
+    text-decoration: underline;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Изображения */
+img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    display: block;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+img.img-article-left {
+    max-width: 40%;
+    height: auto;
+    float: left;
+    margin: 0 15px 10px 0;
+    border: 3px solid #ffb6c1;
+    box-shadow: 0 4px 8px rgba(255, 182, 193, 0.3);
 }
 
-.App-link {
-  color: #61dafb;
+img.img-article-left.thumb {
+    max-width: 150px;
+    height: auto;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Кнопка "Читать пост" */
+p.link-read-post {
+    text-align: right;
+    overflow: visible;
+}
+
+p.link-read-post a {
+    padding: 10px 20px;
+    background: #ff85a2;
+    color: white;
+    text-decoration: none;
+    border-radius: 20px;
+    display: inline-block;
+    transition: all 0.3s ease;
+    position: relative;
+}
+p.link-read-post a::after {
+    content: " 🐾";
+    margin-left: 10px;
+    display: inline-block;
+    animation: pawBounce 1.5s infinite alternate;
+    position: static; /* убрали абсолютное позиционирование */
+}
+
+p.link-read-post a:hover {
+    background: #ff477e;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 135, 162, 0.4);
+}
+
+/* Панель статьи */
+div.article-panel {
+    background: #ffecef;
+    padding: 10px 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+div.article-panel p.first {
+    margin: 0;
+    float: left;
+    color: #ff85a2;
+}
+div.article-panel p.last {
+    margin: 0;
+    float: right;
+    color: #ff85a2;
+}
+
+/* Список статей */
+ul.list-articles {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+ul.list-articles li {
+    border-bottom: 2px dotted #ffb6c1;
+    padding: 20px 0;
+    transition: all 0.3s ease;
+}
+ul.list-articles li:hover {
+    background-color: #fff0f5;
+}
+.table-page {
+    width: 100%;
+    height: 100%;
+    vertical-align: top;
+}
+.table-page tr {height: 100%;}
+
+.clear {clear: both;}
+
+/* Контент */
+.content {
+    overflow: visible;
+    padding: 30px 40px;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: white;
+    border-radius: 10px;
+    margin: 20px 20px 20px 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.content-text h1 {
+    overflow: visible;
+    color: #ff85a2;
+    border-bottom: 2px dotted #ffb6c1;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+.content-text h1::before {
+    overflow: visible;
+    content: "🐾 ";
+}
+.content-text h1::after {
+    overflow: visible;
+    content: " 🐾";
+}
+
+/* Подвал */
+#footer {
+    background: #ffb6c1;
+    padding: 15px;
+    color: white;
+    font-size: 14px;
+    text-align: center;
+    box-shadow: 0 -2px 10px rgba(255, 182, 193, 0.3);
+}
+#footer a {
+    color: white;
+    text-decoration: underline;
+}
+#footer a:hover {
+    color: #5a3e36;
+}
+
+/* Формы */
+.form-input {
+    width: 300px;
+    font-size: 16px;
+    padding: 8px 12px;
+    border: 2px solid #ffb6c1;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.form-label {
+    display: inline-block;
+    min-width: 150px;
+    vertical-align: top;
+    color: #ff85a2;
+    font-weight: bold;
+}
+
+.form-error ul {
+    list-style: none;
+    padding: 0;
+    color: #ff477e;
+}
+
+/* Кнопки форм */
+.form-button {
+    min-width: 200px;
+    font-size: 16px;
+    padding: 10px 20px;
+    background: #ff85a2;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.form-button:hover {
+    background: #ff477e;
+    transform: translateY(-2px);
+}
+
+/* Категории и формы */
+.cat-form {
+    background: #ffecef;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #5a3e36;
+}
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 2px solid #ffb6c1;
+    border-radius: 8px;
+    font-family: inherit;
+    background: white;
+}
+.form-group.error input,
+.form-group.error textarea {
+    border-color: #ff4444;
+    background-color: #fff9f9;
+}
+.error-message {
+    color: #ff4444;
+    font-size: 0.9em;
+    margin-top: 5px;
+    display: block;
+}
+
+button.link-read-post-button {
+    padding: 10px 20px;
+    background: #ff85a2;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-decoration: none;
+    font-family: inherit;
+}
+button.link-read-post-button:hover {
+    background: #ff477e;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 135, 162, 0.4);
+}
+
+.sort-button {
+    padding: 10px 20px;
+    background: #ff85a2;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: all 0.3s ease;
+}
+.sort-button:hover {
+    background: #ff477e;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(255, 135, 162, 0.4);
+}
+.sort-button.active {
+    background: #ff477e;
+    box-shadow: 0 4px 8px rgba(255, 135, 162, 0.6);
+}
+.sort-button.active::after {
+    content: "🐾";
+    margin-left: 5px;
+    display: inline-block;
+    animation: pawBounce 1.5s infinite alternate;
+}
+
+/* Теги */
+.tag-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 5px;
+}
+.tag-checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #ffecef;
+    border: 1px solid #ffb6c1;
+    border-radius: 20px;
+    padding: 6px 12px;
+    font-size: 0.9em;
+    cursor: pointer;
+    min-width: 120px;
+}
+.tag-checkbox input[type="checkbox"] {
+    margin-left: 8px;
+    transform: scale(1.0);
+}
+.tag-checkbox:hover {
+    background: #ffdce7;
+}
+.tag-checkbox.selected::after {
+    content: " 🐾";
+    color: #ff477e;
+    display: inline-block;
+    margin-left: 6px;
+}
+
+/* Заголовок */
+.title-kotofeynik {
+    font-family: 'Pacifico', cursive;
+    font-size: 4rem;
+    background: linear-gradient(45deg, #ff85a2, #ff477e);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 10px #ff477e;
+    animation: glow 2.5s infinite alternate;
+    text-align: center;
+    margin-bottom: 30px;
+}
+.title-kotofeynik::before,
+.title-kotofeynik::after {
+    content: "🐾";
+    margin: 0 10px;
+    display: inline-block;
+    animation: pawBounce 1.5s infinite alternate;
+}
+
+/* Лапка для выбранной категории */
+.left-chapters ul li.selected::before {
+    content: "🐾 ";
+    color: #ff85a2;
+    font-size: 1.2em;
+}
+
+/* Анимация лапки */
+@keyframes pawBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+/* Пагинация */
+.pagination {
+    overflow: visible;
+    text-align: center;
+    margin: 20px 0;
+}
+.pagination button,
+.pagination span {
+    overflow: visible;
+    margin: 0 5px;
+    padding: 8px 12px;
+    background: #ffecef;
+    border: 2px solid #ffb6c1;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: 0.3s;
+}
+.pagination button:hover {
+    background-color: #ffd6de;
+}
+.pagination .current-page {
+    font-weight: bold;
+    background: #ff85a2;
+    color: white;
+    border-color: #ff85a2;
+    cursor: default;
 }
