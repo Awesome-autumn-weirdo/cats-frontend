@@ -14,11 +14,28 @@ const CatForm = ({ onAddCat }) => {
 
   const allTags = ['мальчики', 'девочки', 'котоязык', 'котоменю'];
 
+  // Регулярное выражение для проверки слага: латиница, цифры, дефисы, подчёркивания
+  const slugRegex = /^[a-z0-9-_]+$/;
+
   const validate = () => {
     const newErrors = {};
-    if (!title.trim()) newErrors.title = 'Введите название';
-    if (!content.trim()) newErrors.content = 'Введите описание';
-    if (!slug.trim()) newErrors.slug = 'Введите слаг';
+
+    if (!title.trim()) {
+      newErrors.title = 'Введите название';
+    } else if (title.trim().length < 4) {
+      newErrors.title = 'Название должно быть не менее 4 символов';
+    }
+
+    if (!slug.trim()) {
+      newErrors.slug = 'Введите слаг';
+    } else if (!slugRegex.test(slug.trim())) {
+      newErrors.slug = 'Слаг должен содержать только латиницу, цифры, дефисы и подчёркивания';
+    }
+
+    if (!content.trim()) {
+      newErrors.content = 'Введите описание';
+    }
+
     return newErrors;
   };
 
@@ -31,7 +48,14 @@ const CatForm = ({ onAddCat }) => {
     }
 
     onAddCat({
-      title, slug, content, image, status, category, owner, tags
+      title: title.trim(),
+      slug: slug.trim(),
+      content: content.trim(),
+      image: image.trim(),
+      status,
+      category,
+      owner: owner.trim(),
+      tags,
     });
 
     // Очистка
@@ -90,7 +114,7 @@ const CatForm = ({ onAddCat }) => {
         <select value={category} onChange={e => setCategory(e.target.value)}>
           <option value="ищут хозяина">Ищут хозяина</option>
           <option value="мемные коты">Мемные коты</option>
-          <option value="нашли хозяина">Нашли хозяина</option> {/* ← исправлено */}
+          <option value="нашли хозяина">Нашли хозяина</option>
         </select>
       </div>
 
@@ -104,21 +128,20 @@ const CatForm = ({ onAddCat }) => {
       </div>
 
       <div className="form-group">
-          <label>Теги:</label>
-          <div className="tag-options">
-            {allTags.map(tag => (
-              <label key={tag} className="tag-checkbox">
+        <label>Теги:</label>
+        <div className="tag-options">
+          {allTags.map(tag => (
+            <label key={tag} className="tag-checkbox">
               <span>{tag}</span>
-                <input
-                  type="checkbox"
-                  checked={tags.includes(tag)}
-                  onChange={() => handleTagToggle(tag)}
-                />
-              </label>
-            ))}
-          </div>
+              <input
+                type="checkbox"
+                checked={tags.includes(tag)}
+                onChange={() => handleTagToggle(tag)}
+              />
+            </label>
+          ))}
         </div>
-
+      </div>
 
       <button className="form-button" type="submit">Добавить кота</button>
     </form>
